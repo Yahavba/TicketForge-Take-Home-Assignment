@@ -51,11 +51,14 @@ def cli_create_ticket(username, password):
         payload = {
             "title": title,
             "description": description,
-            "dependsOn": depends_on,
             "customFields": {
                 "priotiyu": priority},
             "stage": "open"
         }
+        if depends_on:
+            payload["dependsOn"] = depends_on
+
+        print(payload)
         ticket = create_ticket(username, password, payload)
 
         console.print(
@@ -101,11 +104,12 @@ def cli_update_ticket(username, password):
             "title": title,
             "description": description,
             "stage": status_options[stage],
-            "dependsOn": depends_on,
             "customFields": {
                 "priotiyu": priority
             }
         }
+        if depends_on:
+            payload["dependsOn"] = depends_on
         ticket = update_ticket(username, password, ticket_id, payload)
         console.print(
             f"[green]Ticket updated successfully: {ticket.get('ref')}[/]")

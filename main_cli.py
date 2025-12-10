@@ -58,9 +58,7 @@ def cli_create_ticket(username, password):
         if depends_on:
             payload["dependsOn"] = depends_on
 
-        print(payload)
         ticket = create_ticket(username, password, payload)
-
         console.print(
             f"[green]Ticket created successfully: {ticket.get('ref')}[/]")
     except Exception as e:
@@ -94,8 +92,7 @@ def cli_update_ticket(username, password):
             "[cyan]Enter new stage (Open / In Progress / Review / Closed): [/]"
         )
         if stage not in status_options:
-            console.print(
-                "[red]Invalid stage entered. Defaulting to Open.[/]")
+            console.print("[red]Invalid stage entered. Defaulting to Open.[/]")
             stage = "Open"
         depends_on = console.input(
             "[cyan]Enter depends on (ticket ID or leave blank): [/]")

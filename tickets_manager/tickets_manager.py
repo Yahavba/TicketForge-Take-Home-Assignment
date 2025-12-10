@@ -27,7 +27,7 @@ def create_ticket(username, password, payload):
                         auth=(username, password),
                         json=payload)
     if res.status_code == 200:
-        return res.json()
+        return res.json()['workitem']
     else:
         raise Exception("Failed to create ticket.")
 
@@ -58,6 +58,6 @@ def update_ticket(username, password, ticket_id, payload):
                        auth=(username, password),
                        json=payload)
     if res.status_code == 200:
-        return res.json()
+        return res.json()['workitem']
     else:
         raise Exception("Failed to update ticket.")
